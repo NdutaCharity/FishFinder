@@ -1,0 +1,29 @@
+{
+  "gateway_id": "dca632b5c99fe01c",
+  "date_modified": "2022-11-19T04:15:25Z",
+  "owner": "guest",
+  "name": "fish feeder",
+  "id": "6370174768f3190a67e225b0",
+  "sensors": [
+    {
+      "value": {
+        "date_received": "2022-11-19T04:15:25Z",
+        "value": 259.52,
+        "timestamp": "2022-11-13T10:11:58Z"
+      },
+      "name": "analogInput 1",
+      "id": "analogInput_1"
+    },
+    {
+      "value": {
+        "date_received": "2022-11-19T04:15:25Z",
+        "value": { "latitude": -4.0257, "altitude": -4.1, "longitude": 3.135 },
+        "timestamp": "2022-11-13T10:11:58Z"
+      },
+      "name": "gpsLocation 1",
+      "id": "gpsLocation_1"
+    }
+  ],
+  "actuators": [],
+  "date_created": "2022-11-18T16:04:03Z"
+}

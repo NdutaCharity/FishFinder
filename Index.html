@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/Leaflet/leaflet.css" />
+<script src="/Leaflet/leaflet.js"></script>
+<!--[if lte IE 8]>
+<link rel="stylesheet" type="text/css" href=" leaflet/
+leaflet.ie.css" />
+<![endif]-->
+<script src = "/Leaflet/leaflet-src.js"></script>
+<!--Ensure the map fits our page-->
+<style>
+html, body, #map {
+height: 100%;
+}
+body {
+padding: 0;
+margin: 0;
+}
+</style>
+<title>Leaflet Maps</title>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+var map = L.map('map', {
+center: [-4.033999864, 39.671163982],
+zoom: 7.5
+});
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+</script>
+
+<script>
+    fetch("./Data/Fish_Feeder.json")
+         .then(res => res.json())
+         .then(data => {
+            console.log(data);
+        })
+</script>
+<!-- connect API -->
+.getJSON("https://api.waziup.io/api/v2/devices/6370174768f3190a67e225b0", function(data) {
+
+    // Array of Leaflet markers
+    var markers = [];
+  
+    // For each row in Fish_Feeder, create a Leaflet marker
+    for (var i = 0; i < data.length; i++) {
+  
+      var item = data[i];
+  
+      // Extract coordinates for each project, convert strings to floats
+      var coordinates = [
+        parseFloat(item.geocoded_column.latitude),
+        parseFloat(item.geocoded_column.longitude)
+      ]
+  
+      // Create a marker with a custom icon
+      var marker = L.marker(coordinates, {
+          icon: L.icon({
+            iconUrl: 'images/americorps.png',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            opacity: 0.5
+          })
+      }).bindTooltip(item.sponsor + '<br>' + item.project_description);
+  
+      // Add marker to the array of markers
+      markers.push(marker);
+    }
+  
+    // Create a Leaflet layer group from array of markers
+    var layer = L.layerGroup(markers);
+    layer.addTo(map); // add layer to the map
+  
+    // Add layer to the legend, together with the little icon
+    legend.addOverlay(layer, 'AmeriCorps NCCC <img src="FishFinder.png" height="11" alt="Fish_Feeder">')
+  
+  })
+</body>
+</html>
